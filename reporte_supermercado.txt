@@ -1,0 +1,111 @@
+===============================================
+       REPORTE DEL SUPERMERCADO
+===============================================
+
+Codigo: 1
+Producto: Arroz
+Pais: Mexico
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 2
+Producto: Frijoles
+Pais: EEUU
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 3
+Producto: Lentejas
+Pais: Canada
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 4
+Producto: Maiz
+Pais: Brasil
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 5
+Producto: Trigo
+Pais: Argentina
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 6
+Producto: Avena
+Pais: Chile
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 7
+Producto: Tomates
+Pais: Peru
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 8
+Producto: Cebolla
+Pais: Colombia
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 9
+Producto: Papas
+Pais: Ecuador
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 10
+Producto: Zanahoria
+Pais: Venezuela
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 11
+Producto: Lechuga
+Pais: Uruguay
+Cantidad: 1
+Precio unitario: ₡1.00
+Total por producto: ₡1.00
+-----------------------------------------------
+Codigo: 12
+Producto: Pepino
+Pais: Paraguay
+Cantidad: 0
+Precio unitario: ₡1.00
+Total por producto: ₡0.00
+-----------------------------------------------
+Codigo: 13
+Producto: Calabaza
+Pais: Bolivia
+Cantidad: 0
+Precio unitario: ₡1.00
+Total por producto: ₡0.00
+-----------------------------------------------
+Codigo: 14
+Producto: Mayonesa
+Pais: Peru
+Cantidad: 0
+Precio unitario: ₡1.00
+Total por producto: ₡0.00
+-----------------------------------------------
+Codigo: 15
+Producto: Mostaza miel
+Pais: Chile
+Cantidad: 0
+Precio unitario: ₡1.00
+Total por producto: ₡0.00
+-----------------------------------------------
+
+TOTAL QUE DEBE RECUPERAR EL SUPERMERCADO: ₡11.00

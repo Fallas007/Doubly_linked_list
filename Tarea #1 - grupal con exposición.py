@@ -33,6 +33,7 @@ class lista_doble_enlazada:
     # atributos de la lista doblemente enlazada
     def __init__(self):
         self.head = None
+        self.tamano = 0
 
     # ---------------------------------------------------------
     # INSERTAR AL FINAL
@@ -45,6 +46,7 @@ class lista_doble_enlazada:
         # Lista vacia
         if self.head is None:
             self.head = nuevo
+            self.tamano += 1
             print(" >> Se ha insertado el producto al final de la lista.")
             return
 
@@ -57,6 +59,7 @@ class lista_doble_enlazada:
         # Conectar el ultimo nodo con el nuevo
         actual.next = nuevo
         nuevo.prev = actual
+        self.tamano += 1
 
         print(" >> Se ha insertado el producto al final de la lista.")
 
@@ -76,6 +79,7 @@ class lista_doble_enlazada:
 
         # El nuevo nodo se convierte en el primero
         self.head = nuevo
+        self.tamano += 1
 
         print(" >> Se ha insertado el producto al inicio de la lista.")
 
@@ -151,6 +155,7 @@ class lista_doble_enlazada:
         actual.prev = nuevo
 
         print(" >> Se ha insertado el producto en la posicion.", posicion)
+        self.tamano += 1
 
 
     # ---------------------------------------------------------
@@ -168,6 +173,7 @@ class lista_doble_enlazada:
         if self.head.next is None:
             self.head = None
             print(" >> Se ha eliminado el unico producto de la lista.")
+            self.tamano -= 1
             return
 
         # Mover head al siguiente nodo
@@ -176,6 +182,7 @@ class lista_doble_enlazada:
         # El nuevo primero no tiene anterior
         self.head.prev = None
 
+        self.tamano -= 1
         print(" >> Se ha eliminado el producto en la posicion 0.")
 
 
@@ -194,6 +201,7 @@ class lista_doble_enlazada:
         if self.head.next is None:
             self.head = None
             print(" >> Se ha eliminado el ultimo producto de la lista.")
+            self.tamano -= 1
             return
 
         actual = self.head
@@ -204,6 +212,7 @@ class lista_doble_enlazada:
 
         # El nodo anterior deja de apuntar al ultimo
         actual.prev.next = None
+        self.tamano -= 1
 
         print(" >> Se ha eliminado el ultimo producto de la lista.")
 
@@ -248,6 +257,7 @@ class lista_doble_enlazada:
         # Conectar el nodo siguiente con el anterior
         actual.next.prev = actual.prev
 
+        self.tamano -= 1
         print(" >> Se ha eliminado el producto en la posicion.", posicion)
 
 
@@ -282,21 +292,12 @@ class lista_doble_enlazada:
 
     def verificar_vacia(self):
 
-        if self.head is None:
+        if self.tamano == 0:
             print("\n >> La lista esta vacia.")
             return
-
-        contador = 0
-        actual = self.head
-
-        while actual is not None:
-            actual = actual.next
-            contador += 1
-
-        print(
-            f"\n >> La lista no esta vacia. Tiene {contador} elementos."
-        )
-
+        elif self.tamano > 0:
+            print(f"\n >> La lista contiene {self.tamano} productos.")
+            return
 
     # ---------------------------------------------------------
     # MOSTRAR LISTA DE IZQUIERDA A DERECHA
@@ -304,53 +305,47 @@ class lista_doble_enlazada:
 
     def display(self):
 
-        actual = self.head
-        contador = 0
-
         print("\n")
-        while actual is not None:
+        self.display_recursivo(self.head, 0)
+
+
+    def display_recursivo(self, actual, contador):
+
+        if actual is None:
             print("| --------------------- ", end=" ")
-            print(f"\n  - - - [{contador}] Informacion del producto - - - ")
-            print(actual.data.__str__())
-            
-            
-            actual = actual.next
-            contador += 1
+            print("\n  - - - None")
+            return
 
         print("| --------------------- ", end=" ")
-        print("\n  - - - None")
+        print(f"\n  - - - [{contador}] Informacion del producto - - - ")
+        print(actual.data.__str__())
+
+        self.display_recursivo(actual.next, contador + 1)
 
 
     # ---------------------------------------------------------
     # MOSTRAR LISTA DE DERECHA A IZQUIERDA
     # ---------------------------------------------------------
 
-    
-    def display_reversa(self):
-
-        if self.head is None:
-            print("\n >> La lista esta vacia.")
+    def display_reversa_recursivo(self, actual, contador):
+        # Caso base
+        if actual is None:
+            print("| --------------------- ", end=" ")
+            print("\n  - - - None")
             return
 
-        actual = self.head
-        
-
-        contador = 0           
-        # Ir hasta el ultimo nodo
-        while actual.next is not None:
-            contador += 1
-            actual = actual.next
-
-        # Recorrer hacia atras
-        while actual is not None:
-            print("| --------------------- ", end=" ")
-            print(f"\n  - - - [{contador}] Informacion del producto - - - ")
-            print(actual.data.__str__())
-            actual = actual.prev
-            contador -= 1
 
         print("| --------------------- ", end=" ")
-        print("\n  - - - None")
+        print(f"\n  - - - [{contador}] Informacion del producto - - - ")
+        print(actual.data.__str__())
+
+        # Llamada recursiva hacia atrás
+        self.display_reversa_recursivo(actual.prev, contador - 1)
+
+
+    # ---------------------------------------------------------
+    # CONVERTIR LISTA A COLA DE PRODUCTOS SIN EXISTENCIA
+    # ---------------------------------------------------------
 
     def conv_lista_a_cola(self): 
         actual = self.head 
@@ -401,17 +396,6 @@ class lista_doble_enlazada:
 
         print(f"\n >> Reporte generado correctamente: {nombre_archivo}")
         print(f" >> Total que debe recuperar el supermercado: ₡{total:,.2f}")
-
-
-    def conv_lista_a_cola(self): 
-        actual = self.head 
-        producto_cola = cola() 
-
-        while actual is not None: 
-            if actual.data.existencia == 0: 
-                producto_cola.insertar_cola(actual.data) 
-            actual = actual.next 
-        producto_cola.mostrar()
 
 
 # ============================================================
@@ -588,7 +572,7 @@ def submenu_gestion_productos(lista):
 
             print("\n >> Insertar producto al inicio:")
 
-            codigo = int(input(" >> Codigo del producto:          "))
+            codigo = int(input(" >> Codigo del producto:           "))
             nombre = input(" >> Nombre del producto:           ")
             precio = float(input(" >> Precio del producto:           "))
             pais = input(" >> Pais de origen del producto:   ")
@@ -718,10 +702,9 @@ def submenu_consultas(lista):
         print("========================================")
         print(" 1. Buscar un producto")
         print(" 2. Verificar tamano de la lista")
-        print(" 3. Mostrar lista izquierda -> derecha")
-        print(" 4. Mostrar lista derecha -> izquierda")
-        print(" 5. Mostrar lista de forma recursiva")
-        print(" 6. Mostrar cola de productos sin existencia")
+        print(" 3. Mostrar lista izquierda -> derecha (Met. recursivo)")
+        print(" 4. Mostrar lista derecha -> izquierda (Met. recursivo)")
+        print(" 5. Mostrar cola de productos sin existencia")
         print(" 0. Regresar al menu principal")
         print("========================================")
 
@@ -737,9 +720,11 @@ def submenu_consultas(lista):
 
         elif opcion == 1:
 
-            codigo = int(
-                input("\n >> Codigo del producto a buscar en la lista: ")
-            )
+            try:
+                codigo = int(input("\n >> Codigo del producto a buscar en la lista: "))
+            except ValueError:
+                print("\n >> ERROR: Debe ingresar un codigo numerico.")
+                return
 
             lista.buscar_contenido(codigo)
 
@@ -749,20 +734,21 @@ def submenu_consultas(lista):
 
         elif opcion == 3:
 
-            print("\n >> MOSTRANDO LISTA DE IZQUIERDA A DERECHA")
-            lista.display()
+            print("\n >> MOSTRANDO LISTA DE IZQUIERDA A DERECHA (met. recursivo)")
+            lista.display_recursivo(lista.head, 0)
 
         elif opcion == 4:
 
-            print("\n >> MOSTRANDO LISTA DE DERECHA A IZQUIERDA")
-            lista.display_reversa()
+            print("\n >> MOSTRANDO LISTA DE DERECHA A IZQUIERDA (met. recursivo)")
+            actual = lista.head
+            # Buscar el último nodo
+            while actual.next is not None:
+                actual = actual.next
+
+            # Iniciar recorrido recursivo desde el último nodo
+            lista.display_reversa_recursivo(actual, lista.tamano - 1)
 
         elif opcion == 5:
-
-            print("\n >> MOSTRANDO LISTA DE FORMA RECURSIVA")
-            lista.display_recursivo()
-
-        elif opcion == 6:
 
             lista.conv_lista_a_cola()
 
